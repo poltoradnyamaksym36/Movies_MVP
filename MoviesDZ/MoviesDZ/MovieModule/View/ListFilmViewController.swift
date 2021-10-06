@@ -76,7 +76,11 @@ extension ListFilmViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let movieID = moviePresenter.arrayListFilms?.results[indexPath.row].id else { return }
         let vc = DetailFilmViewController()
-        vc.movieID = movieID
+//        vc.presenter = DetailMoviePresenter(id: movieID)
+//        vc.movieID = movieID
+        var presenterVC = DetailMoviePresenter(id: movieID)
+        vc.presenter = presenterVC
+        presenterVC.view = vc
         navigationController?.pushViewController(vc, animated: true)
     }
 }

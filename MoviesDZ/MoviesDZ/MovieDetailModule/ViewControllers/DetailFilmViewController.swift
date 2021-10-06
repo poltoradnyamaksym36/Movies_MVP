@@ -4,11 +4,14 @@
 import UIKit
 
 final class DetailFilmViewController: UIViewController {
+    var presenter: DetailMoviePresenter?
+    var movieID: Int?
+
     // MARK: - Private Properties
 
     private let imageCellID = SelectedMovieImageTableViewCell.identifier
     private let descriptionCellID = DetailFilmTableViewCell.identifier
-    private var movieList: Movie?
+
     private let chosenMovieTableView: UITableView = {
         let chosenMovieTableView = UITableView()
         chosenMovieTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -22,16 +25,16 @@ final class DetailFilmViewController: UIViewController {
 
     // MARK: - Public Properties
 
-    var moviePresenter: MoviewViewPresenterProtocol!
-    var movieID = Int()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         chosenMovieTableView.delegate = self
         chosenMovieTableView.dataSource = self
         subviews()
         constraints()
-        fetchFill()
+    }
+
+    func reloadData() {
+        chosenMovieTableView.reloadData()
     }
 
     // MARK: - Private Methods
@@ -48,32 +51,6 @@ final class DetailFilmViewController: UIViewController {
             chosenMovieTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-
-    private func fetchFill() {
-        guard let url =
-            URL(
-                string: """
-                https://api.themoviedb.org/3/movie/\(movieID)?api_key=7502b719af3e4c9ad68d80658e7b83ed&language=ru-RU
-                """
-            )
-        else { return }
-        let session = URLSession.shared
-        session.dataTask(with: url) { data, _, error in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            do {
-                self.movieList = try JSONDecoder()
-                    .decode(Movie.self, from: data ?? Data()) // во 2 экране вместо movieList парсим Result
-                DispatchQueue.main.async {
-                    self.chosenMovieTableView.reloadData()
-                    print("reloadData")
-                }
-            } catch {
-                print(error.localizedDescription)
-            }
-        }.resume()
-    }
 }
 
 // MARK: - UITableViewDataSource
@@ -84,7 +61,7 @@ extension DetailFilmViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let movie = movieList else { return UITableViewCell() }
+        guard let movie = presenter?.movieList else { return UITableViewCell() }
         switch indexPath.row {
         case 0:
             guard let cell = tableView
