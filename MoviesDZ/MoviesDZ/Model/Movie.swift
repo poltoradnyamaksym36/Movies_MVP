@@ -2,6 +2,7 @@
 // Copyright © VTB. All rights reserved.
 
 import Foundation
+
 /// Movie Model
 struct Movie: Codable {
     let adult: Bool?

@@ -22,6 +22,7 @@ final class DetailFilmViewController: UIViewController {
 
     // MARK: - Public Properties
 
+    var moviePresenter: MoviewViewPresenterProtocol!
     var movieID = Int()
 
     override func viewDidLoad() {
