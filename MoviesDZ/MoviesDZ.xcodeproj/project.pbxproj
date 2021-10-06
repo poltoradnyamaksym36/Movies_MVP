@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		300AE8E6270CE1D4007DC07B /* MoviePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300AE8E5270CE1D4007DC07B /* MoviePresenter.swift */; };
 		305A7BAB26B73D7900D8291D /* SelectedMovieImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305A7BAA26B73D7900D8291D /* SelectedMovieImageTableViewCell.swift */; };
 		3087E8CD26AF27B700F3BD09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3087E8CC26AF27B700F3BD09 /* AppDelegate.swift */; };
 		3087E8CF26AF27B700F3BD09 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3087E8CE26AF27B700F3BD09 /* SceneDelegate.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		300AE8E5270CE1D4007DC07B /* MoviePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePresenter.swift; sourceTree = "<group>"; };
 		305A7BAA26B73D7900D8291D /* SelectedMovieImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMovieImageTableViewCell.swift; sourceTree = "<group>"; };
 		3087E8C926AF27B700F3BD09 /* MoviesDZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesDZ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3087E8CC26AF27B700F3BD09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		300AE8E4270CE1A6007DC07B /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				300AE8E5270CE1D4007DC07B /* MoviePresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		3087E8C026AF27B700F3BD09 = {
 			isa = PBXGroup;
 			children = (
@@ -68,6 +78,7 @@
 			children = (
 				3087E8CC26AF27B700F3BD09 /* AppDelegate.swift */,
 				3087E8CE26AF27B700F3BD09 /* SceneDelegate.swift */,
+				300AE8E4270CE1A6007DC07B /* Presenter */,
 				30A6CDF226B87ACD005B35D4 /* ViewControllers */,
 				30A6CDF126B87AC0005B35D4 /* CustomCells */,
 				30CFFE0E26B5AFA8001F8806 /* Model */,
@@ -221,6 +232,7 @@
 				3087E8D126AF27B700F3BD09 /* ListFilmViewController.swift in Sources */,
 				30D7ADAD26B677F00002E3EB /* DetailFilmViewController.swift in Sources */,
 				30A6CDF026B86EAA005B35D4 /* DetailFilmTableViewCell.swift in Sources */,
+				300AE8E6270CE1D4007DC07B /* MoviePresenter.swift in Sources */,
 				30CFFE0D26B5AE36001F8806 /* ListFilm.swift in Sources */,
 				3087E8CD26AF27B700F3BD09 /* AppDelegate.swift in Sources */,
 				30C9296B26B1CA92002A9145 /* Movie.swift in Sources */,
