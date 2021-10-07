@@ -12,8 +12,10 @@ class ListFilmViewController: UIViewController {
 
     // MARK: - Public Properties
 
-    var moviePresenter: MoviewViewPresenterProtocol!
-
+    var moviePresenter: MovieViewPresenterProtocol!
+    var networkApiService: NetworkServiceProtocol?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(filmTableView)
@@ -49,21 +51,26 @@ extension ListFilmViewController: UITableViewDataSource {
             .dequeueReusableCell(withIdentifier: listFilmTableViewCellID, for: indexPath) as? ListFilmTableViewCell
         else { return UITableViewCell() }
 
-        DispatchQueue.global().async {
-            guard let poster = self.moviePresenter.arrayListFilms?.results[indexPath.row].posterPath else { return }
-
-            guard let urlImage =
-                URL(
-                    string: "https://image.tmdb.org/t/p/w500\(poster)"
-                )
-            else { return }
-            guard let imageData = try? Data(contentsOf: urlImage) else { return }
-            guard let image = UIImage(data: imageData) else { return }
-
-            DispatchQueue.main.async {
-                cell.movieImageView.image = image
-            }
-        }
+        
+        cell.setupView(listFilm: moviePresenter.arrayListFilms?.results[indexPath.row])
+        
+        
+//        DispatchQueue.global().async {
+//
+//            guard let poster = self.moviePresenter.arrayListFilms?.results[indexPath.row].posterPath else { return }
+//
+//            guard let urlImage =
+//                URL(
+//                    string: "https://image.tmdb.org/t/p/w500\(poster)"
+//                )
+//            else { return }
+//            guard let imageData = try? Data(contentsOf: urlImage) else { return }
+//            guard let image = UIImage(data: imageData) else { return }
+//
+//            DispatchQueue.main.async {
+//                cell.movieImageView.image = image
+//            }
+//        }
         cell.labelText.text = moviePresenter.arrayListFilms?.results[indexPath.row].overview
         cell.titleLabel.text = moviePresenter.arrayListFilms?.results[indexPath.row].title
         return cell
@@ -76,11 +83,10 @@ extension ListFilmViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let movieID = moviePresenter.arrayListFilms?.results[indexPath.row].id else { return }
         let vc = DetailFilmViewController()
-//        vc.presenter = DetailMoviePresenter(id: movieID)
-//        vc.movieID = movieID
-        var presenterVC = DetailMoviePresenter(id: movieID)
+        let network = NetworkService()
+        var presenterVC = DetailMoviePresenter(view: vc as! MovieDetailViewProtocol, networkService: network)
         vc.presenter = presenterVC
-        presenterVC.view = vc
+        presenterVC.view = vc as! MovieDetailViewProtocol
         navigationController?.pushViewController(vc, animated: true)
     }
 }

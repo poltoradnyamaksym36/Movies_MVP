@@ -12,7 +12,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         let firstVC = ListFilmViewController()
-        let presentFirstVC = MoviePresenter(view: firstVC)
         firstVC.moviePresenter = presentFirstVC
 
         guard let windowScene = (scene as? UIWindowScene) else { return }

@@ -61,7 +61,7 @@ extension DetailFilmViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let movie = presenter?.movieList else { return UITableViewCell() }
+        guard let movie = presenter?.elements else { return UITableViewCell() }
         switch indexPath.row {
         case 0:
             guard let cell = tableView

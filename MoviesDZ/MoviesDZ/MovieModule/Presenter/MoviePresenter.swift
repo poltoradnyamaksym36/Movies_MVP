@@ -3,41 +3,33 @@
 
 import Foundation
 
-protocol MovieViewProtocol {
+protocol MovieViewProtocol: AnyObject {
     func reloadData()
 }
 
-protocol MoviewViewPresenterProtocol {
+protocol MovieViewPresenterProtocol: AnyObject {
     var arrayListFilms: ListFilm? { get set }
+    func receiveMovieList()
 }
 
-final class MoviePresenter: MoviewViewPresenterProtocol {
-    let view: MovieViewProtocol
+final class MoviePresenter: MovieViewPresenterProtocol {
+
     var arrayListFilms: ListFilm?
+    let networkService: NetworkServiceProtocol!
+    weak var view: MovieViewProtocol?
 
-    init(view: MovieViewProtocol) {
+    init(view: MovieViewProtocol, networkService: NetworkServiceProtocol) {
         self.view = view
-        fetchData()
+        self.networkService = networkService
     }
-
-    private func fetchData() {
-        guard let url =
-            URL(
-                string: "https://api.themoviedb.org/3/movie/popular?api_key=8a8ef26b18b57682681f9e71bfc3d836&language=ru-RU&page=1"
-            )
-        else { return }
-
-        let session = URLSession.shared
-
-        session.dataTask(with: url) { data, _, error in
-            guard let data = data else { return }
-            do {
-                let decodeData = try JSONDecoder().decode(ListFilm.self, from: data)
-                self.arrayListFilms = decodeData
-                self.view.reloadData()
-            } catch {
-                print("Error", error.localizedDescription)
+    
+    func receiveMovieList() {
+        networkService.getFilms { [weak self] elements in
+            if elements != nil {
+                self?.arrayListFilms = elements
+                self?.view?.reloadData()
             }
-        }.resume()
+        }
     }
+    
 }

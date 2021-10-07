@@ -3,19 +3,20 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		300AE8E6270CE1D4007DC07B /* MoviePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300AE8E5270CE1D4007DC07B /* MoviePresenter.swift */; };
 		305A7BAB26B73D7900D8291D /* SelectedMovieImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305A7BAA26B73D7900D8291D /* SelectedMovieImageTableViewCell.swift */; };
+		307EB147270EEC9500E44945 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 307EB146270EEC9500E44945 /* Alamofire */; };
 		3087E8CD26AF27B700F3BD09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3087E8CC26AF27B700F3BD09 /* AppDelegate.swift */; };
 		3087E8CF26AF27B700F3BD09 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3087E8CE26AF27B700F3BD09 /* SceneDelegate.swift */; };
 		3087E8D126AF27B700F3BD09 /* ListFilmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3087E8D026AF27B700F3BD09 /* ListFilmViewController.swift */; };
 		3087E8D626AF27B800F3BD09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3087E8D526AF27B800F3BD09 /* Assets.xcassets */; };
 		3087E8D926AF27B800F3BD09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3087E8D726AF27B800F3BD09 /* LaunchScreen.storyboard */; };
 		3098ED1E270E278B00B02987 /* DetailMoviePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3098ED1D270E278B00B02987 /* DetailMoviePresenter.swift */; };
-		3098ED22270E463F00B02987 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3098ED21270E463F00B02987 /* NetworkService.swift */; };
+		3098ED22270E463F00B02987 /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3098ED21270E463F00B02987 /* NetworkServiceProtocol.swift */; };
 		30A6CDF026B86EAA005B35D4 /* DetailFilmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A6CDEF26B86EAA005B35D4 /* DetailFilmTableViewCell.swift */; };
 		30C9296B26B1CA92002A9145 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C9296A26B1CA92002A9145 /* Movie.swift */; };
 		30C9296D26B1D978002A9145 /* ListFilmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C9296C26B1D978002A9145 /* ListFilmTableViewCell.swift */; };
@@ -34,7 +35,7 @@
 		3087E8D826AF27B800F3BD09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3087E8DA26AF27B800F3BD09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3098ED1D270E278B00B02987 /* DetailMoviePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMoviePresenter.swift; sourceTree = "<group>"; };
-		3098ED21270E463F00B02987 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		3098ED21270E463F00B02987 /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
 		30A6CDEF26B86EAA005B35D4 /* DetailFilmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFilmTableViewCell.swift; sourceTree = "<group>"; };
 		30C9296A26B1CA92002A9145 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		30C9296C26B1D978002A9145 /* ListFilmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFilmTableViewCell.swift; sourceTree = "<group>"; };
@@ -47,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				307EB147270EEC9500E44945 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,7 +152,7 @@
 		3098ED20270E2A8F00B02987 /* ServiceLayer */ = {
 			isa = PBXGroup;
 			children = (
-				3098ED21270E463F00B02987 /* NetworkService.swift */,
+				3098ED21270E463F00B02987 /* NetworkServiceProtocol.swift */,
 			);
 			path = ServiceLayer;
 			sourceTree = "<group>";
@@ -190,14 +192,15 @@
 				3087E8C526AF27B700F3BD09 /* Sources */,
 				3087E8C626AF27B700F3BD09 /* Frameworks */,
 				3087E8C726AF27B700F3BD09 /* Resources */,
-				301F745826AF2AD500938DBD /* SwiftFormatter */,
-				3087E8E026AF27C400F3BD09 /* SwiftLint */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = MoviesDZ;
+			packageProductDependencies = (
+				307EB146270EEC9500E44945 /* Alamofire */,
+			);
 			productName = MoviesDZ;
 			productReference = 3087E8C926AF27B700F3BD09 /* MoviesDZ.app */;
 			productType = "com.apple.product-type.application";
@@ -225,6 +228,9 @@
 				Base,
 			);
 			mainGroup = 3087E8C026AF27B700F3BD09;
+			packageReferences = (
+				307EB145270EEC9500E44945 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 3087E8CA26AF27B700F3BD09 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -246,46 +252,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		301F745826AF2AD500938DBD /* SwiftFormatter */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftFormatter;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
-		};
-		3087E8E026AF27C400F3BD09 /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		3087E8C526AF27B700F3BD09 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -301,7 +267,7 @@
 				3098ED1E270E278B00B02987 /* DetailMoviePresenter.swift in Sources */,
 				30C9296D26B1D978002A9145 /* ListFilmTableViewCell.swift in Sources */,
 				3087E8CF26AF27B700F3BD09 /* SceneDelegate.swift in Sources */,
-				3098ED22270E463F00B02987 /* NetworkService.swift in Sources */,
+				3098ED22270E463F00B02987 /* NetworkServiceProtocol.swift in Sources */,
 				305A7BAB26B73D7900D8291D /* SelectedMovieImageTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -496,6 +462,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		307EB145270EEC9500E44945 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		307EB146270EEC9500E44945 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 307EB145270EEC9500E44945 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3087E8C126AF27B700F3BD09 /* Project object */;
 }

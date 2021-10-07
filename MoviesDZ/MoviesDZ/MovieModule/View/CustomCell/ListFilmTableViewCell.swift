@@ -5,13 +5,14 @@ import UIKit
 /// MyTableViewCell
 class ListFilmTableViewCell: UITableViewCell {
     static let identifier = "ListFilmTableViewCell"
+    private let movieAPIService = NetworkService()
+
 
     // MARK: - Private Properties
 
-    private var arrayMovie: [Results] = []
+    private var arrayMovie = [ListFilm]()
 
     // MARK: - Public Properties
-
     let titleLabel = UILabel()
     let labelText = UILabel()
     let movieImageView = UIImageView()
@@ -25,6 +26,13 @@ class ListFilmTableViewCell: UITableViewCell {
         createImage()
         createLabel()
         createTitleLabel()
+    }
+    
+    func setupView(listFilm: Results?) {
+        labelText.text = listFilm?.overview
+        movieAPIService.receiveImage(posterPath: listFilm?.posterPath ?? "") { [weak self] image in
+            self?.movieImageView.image = image
+        }
     }
 
     // MARK: - Public Methods
