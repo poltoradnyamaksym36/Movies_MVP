@@ -6,21 +6,16 @@ import UIKit
 class ListFilmTableViewCell: UITableViewCell {
     static let identifier = "ListFilmTableViewCell"
     private let movieAPIService = NetworkService()
-
-
-    // MARK: - Private Properties
-
-    private var arrayMovie = [ListFilm]()
-
+    
     // MARK: - Public Properties
     let titleLabel = UILabel()
     let labelText = UILabel()
     let movieImageView = UIImageView()
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         createImage()
@@ -28,15 +23,15 @@ class ListFilmTableViewCell: UITableViewCell {
         createTitleLabel()
     }
     
-    func setupView(listFilm: Results?) {
-        labelText.text = listFilm?.overview
-        movieAPIService.receiveImage(posterPath: listFilm?.posterPath ?? "") { [weak self] image in
+    func setupView(result: Results?) {
+        labelText.text = result?.overview
+        movieAPIService.receiveImage(posterPath: result?.posterPath ?? "", completion: { [weak self] image in
             self?.movieImageView.image = image
-        }
+        })
     }
-
+    
     // MARK: - Public Methods
-
+    
     public func createLabel() {
         addSubview(labelText)
         labelText.numberOfLines = 0
@@ -48,7 +43,7 @@ class ListFilmTableViewCell: UITableViewCell {
             labelText.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ])
     }
-
+    
     public func createImage() {
         addSubview(movieImageView)
         movieImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -60,7 +55,7 @@ class ListFilmTableViewCell: UITableViewCell {
             movieImageView.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
-
+    
     public func createTitleLabel() {
         addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

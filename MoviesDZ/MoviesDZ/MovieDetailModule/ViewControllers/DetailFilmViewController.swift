@@ -31,12 +31,9 @@ final class DetailFilmViewController: UIViewController {
         chosenMovieTableView.dataSource = self
         subviews()
         constraints()
+        presenter?.receiveMovieDetails()
     }
-
-    func reloadData() {
-        chosenMovieTableView.reloadData()
-    }
-
+    
     // MARK: - Private Methods
 
     private func subviews() {
@@ -70,9 +67,8 @@ extension DetailFilmViewController: UITableViewDataSource {
                     for: indexPath
                 ) as? SelectedMovieImageTableViewCell
             else { return UITableViewCell() }
-            cell.configure(movie: movie)
+            presenter?.receiveMovieDetailImage(cell: cell)
             return cell
-
         case 1:
             guard let cell = tableView
                 .dequeueReusableCell(
@@ -87,10 +83,19 @@ extension DetailFilmViewController: UITableViewDataSource {
     }
 }
 
+
 // MARK: - UITableViewDelegate
 
 extension DetailFilmViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         400
+    }
+}
+
+extension DetailFilmViewController: MovieDetailViewProtocol {
+    func reloadData() {
+        DispatchQueue.main.async {
+            self.chosenMovieTableView.reloadData()
+        }
     }
 }

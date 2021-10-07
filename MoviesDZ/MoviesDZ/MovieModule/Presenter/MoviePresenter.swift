@@ -15,7 +15,7 @@ protocol MovieViewPresenterProtocol: AnyObject {
 final class MoviePresenter: MovieViewPresenterProtocol {
 
     var arrayListFilms: ListFilm?
-    let networkService: NetworkServiceProtocol!
+    let networkService: NetworkServiceProtocol?
     weak var view: MovieViewProtocol?
 
     init(view: MovieViewProtocol, networkService: NetworkServiceProtocol) {
@@ -24,7 +24,7 @@ final class MoviePresenter: MovieViewPresenterProtocol {
     }
     
     func receiveMovieList() {
-        networkService.getFilms { [weak self] elements in
+        networkService?.getFilms { [weak self] elements in
             if elements != nil {
                 self?.arrayListFilms = elements
                 self?.view?.reloadData()

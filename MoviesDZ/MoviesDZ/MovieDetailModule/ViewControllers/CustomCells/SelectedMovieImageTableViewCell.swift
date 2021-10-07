@@ -8,7 +8,7 @@ final class SelectedMovieImageTableViewCell: UITableViewCell {
 
     // MARK: - Private Properties
 
-    private let chosenMoviePosterImageView = UIImageView()
+    let chosenMoviePosterImageView = UIImageView()
     private let descriptionLabel = UILabel()
 
     // MARK: - Private methods
@@ -24,7 +24,7 @@ final class SelectedMovieImageTableViewCell: UITableViewCell {
             }
         }
     }
-
+    
     override func layoutSubviews() {
         constraints()
     }

@@ -5,27 +5,27 @@ import Foundation
 import Alamofire
 import UIKit
 
-protocol NetworkServiceProtocol {
-    func getFilms(completion: @escaping (ListFilm?) -> Void)
+protocol NetworkServiceProtocol: AnyObject {
+    func getFilms(completion: @escaping (ListFilm?) -> Void) // ListFilm
     func getFilmDetails(movieID: Int?, completion: @escaping (Movie?) -> Void)
-    func receiveImage(posterPath: String?, completion: @escaping (UIImage?) -> Void)
+    func receiveImage(posterPath: String?, completion: @escaping (UIImage) -> Void)
 }
 
 class NetworkService: NetworkServiceProtocol {
-    func receiveImage(posterPath: String?, completion: @escaping (UIImage?) -> Void) {
+    func receiveImage(posterPath: String?, completion: @escaping (UIImage) -> Void) {
         DispatchQueue.global().async {
             guard
-                let posterPath = posterPath,
-                let url = URL(string: "https://image.tmdb.org/t/p/w500/\(posterPath)"),
-                let imageInformation = try? Data(contentsOf: url),
-                let posterImage = UIImage(data: imageInformation) else { return }
+                  let posterPath = posterPath,
+                  let url = URL(string: "https://image.tmdb.org/t/p/w500/\(posterPath)"),
+                  let imageInformation = try? Data(contentsOf: url),
+                  let posterImage = UIImage(data: imageInformation) else { return }
             DispatchQueue.main.async {
                 completion(posterImage)
             }
         }
     }
     
-    func getFilms(completion: @escaping (ListFilm?) -> Void) {
+    func getFilms(completion: @escaping (ListFilm?) -> Void) { //ListFilm
         let urlString = "https://api.themoviedb.org/3/movie/popular?api_key=8a8ef26b18b57682681f9e71bfc3d836&language=ru-RU&page=1"
         guard let url = URL(string: urlString) else { return }
         
@@ -34,7 +34,7 @@ class NetworkService: NetworkServiceProtocol {
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let movie = try decoder.decode(ListFilm.self, from: data)
+                let movie = try decoder.decode(ListFilm.self, from: data) //ListFilm
                 completion(movie)
             } catch {
                 completion(nil)

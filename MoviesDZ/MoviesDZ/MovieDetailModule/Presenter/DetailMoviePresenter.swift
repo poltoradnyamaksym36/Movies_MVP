@@ -12,19 +12,17 @@ protocol MovieDetailViewProtocol: AnyObject{
 protocol DetailViewPresenterProtocol: AnyObject{
     var movieId: Int? {get set}
     func receiveMovieDetails()
-    func receiveMovieDetailImage(cell: ListFilmTableViewCell )
+    func receiveMovieDetailImage(cell: SelectedMovieImageTableViewCell )
 }
 
 final class DetailMoviePresenter: DetailViewPresenterProtocol {
     
-    
-    private let networkService: NetworkServiceProtocol?
-    var view: MovieDetailViewProtocol?
-    weak var detailViewController: DetailFilmViewController?
+    private let networkService: NetworkService?
+    private var view: MovieDetailViewProtocol?
     var movieId: Int?
     var elements: Movie?
     
-    init(view: MovieDetailViewProtocol, networkService: NetworkServiceProtocol) {
+    init(view: MovieDetailViewProtocol, networkService: NetworkService) {
         self.view = view
         self.networkService = networkService
     }
@@ -38,9 +36,9 @@ final class DetailMoviePresenter: DetailViewPresenterProtocol {
         })
     }
     
-    func receiveMovieDetailImage(cell: ListFilmTableViewCell) {
+    func receiveMovieDetailImage(cell: SelectedMovieImageTableViewCell) {
         networkService?.receiveImage(posterPath: elements?.posterPath, completion: { [weak self] image in
-            cell.movieImageView.image = image
+            cell.chosenMoviePosterImageView.image = image
             self?.view?.reloadData()
         })
     }
