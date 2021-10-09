@@ -15,12 +15,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         
-        let firstVC = ListFilmViewController()
-        let networkService = NetworkService()
-        let presenterVC = MoviePresenter(view: firstVC, networkService: networkService)
-        firstVC.moviePresenter = presenterVC
-        let navController = UINavigationController(rootViewController: firstVC)
-        window?.rootViewController = navController
+        
+        let navigationController = UINavigationController()
+        let builder = ModelBuilder()
+        let router = Router(navigationController: navigationController, builder: builder)
+        router.initialFilmViewController()
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 
