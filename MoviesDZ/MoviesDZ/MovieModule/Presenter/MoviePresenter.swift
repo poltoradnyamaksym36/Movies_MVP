@@ -10,17 +10,21 @@ protocol MovieViewProtocol: AnyObject {
 protocol MovieViewPresenterProtocol: AnyObject {
     var arrayListFilms: ListFilm? { get set }
     func receiveMovieList()
+    func tapOnMovieCell(movieId: Int)
 }
 
 final class MoviePresenter: MovieViewPresenterProtocol {
 
+    
     var arrayListFilms: ListFilm?
     let networkService: NetworkServiceProtocol?
+    var router: RouterProtocol?
     weak var view: MovieViewProtocol?
 
-    init(view: MovieViewProtocol, networkService: NetworkServiceProtocol) {
+    init(view: MovieViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
         self.view = view
         self.networkService = networkService
+        self.router = router
     }
     
     func receiveMovieList() {
@@ -30,6 +34,9 @@ final class MoviePresenter: MovieViewPresenterProtocol {
                 self?.view?.reloadData()
             }
         }
+    }
+    func tapOnMovieCell(movieId: Int) {
+        router?.showFilmDetail(movieId: movieId)
     }
     
 }

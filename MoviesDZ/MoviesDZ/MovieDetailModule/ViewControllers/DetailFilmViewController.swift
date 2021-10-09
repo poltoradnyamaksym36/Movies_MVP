@@ -4,7 +4,7 @@
 import UIKit
 
 final class DetailFilmViewController: UIViewController {
-    var presenter: DetailMoviePresenter?
+    var presenter: MovieDetailPresenter?
     var movieID: Int?
 
     // MARK: - Private Properties

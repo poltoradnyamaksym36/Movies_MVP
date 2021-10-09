@@ -4,6 +4,7 @@
 import UIKit
 /// FirstView
 class ListFilmViewController: UIViewController {
+    
     // MARK: Private Properties
 
     private var filmTableView = UITableView()
@@ -12,7 +13,7 @@ class ListFilmViewController: UIViewController {
 
     // MARK: - Public Properties
 
-    var moviePresenter: MovieViewPresenterProtocol?
+    var presenter: MovieViewPresenterProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +26,7 @@ class ListFilmViewController: UIViewController {
         filmTableView.dataSource = self
         filmTableView.delegate = self
         setConstraints()
-        moviePresenter?.receiveMovieList()
+        presenter?.receiveMovieList()
     }
 
     private func setConstraints() {
@@ -42,14 +43,14 @@ class ListFilmViewController: UIViewController {
 
 extension ListFilmViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        moviePresenter?.arrayListFilms?.results.count ?? 0
+        presenter?.arrayListFilms?.results.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView
             .dequeueReusableCell(withIdentifier: listFilmTableViewCellID, for: indexPath) as? ListFilmTableViewCell
         else { return UITableViewCell() }
-        cell.setupView(result: moviePresenter?.arrayListFilms?.results[indexPath.row])
+        cell.setupView(result: presenter?.arrayListFilms?.results[indexPath.row])
         return cell
     }
 }
@@ -58,13 +59,8 @@ extension ListFilmViewController: UITableViewDataSource {
 
 extension ListFilmViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailVC = DetailFilmViewController()
-        let network = NetworkService()
-        let detailVCPresenter = DetailMoviePresenter(view: detailVC, networkService: network)
-        guard let movie = moviePresenter?.arrayListFilms?.results[indexPath.row].id else { return }
-        detailVCPresenter.movieId = movie
-        detailVC.presenter = detailVCPresenter
-        navigationController?.pushViewController(detailVC, animated: true)
+        guard let movieID = presenter?.arrayListFilms?.results[indexPath.row].id else { return }
+        presenter?.tapOnMovieCell(movieId: movieID)
     }
 }
 

@@ -12,19 +12,21 @@ protocol MovieDetailViewProtocol: AnyObject{
 protocol DetailViewPresenterProtocol: AnyObject{
     var movieId: Int? {get set}
     func receiveMovieDetails()
-    func receiveMovieDetailImage(cell: SelectedMovieImageTableViewCell )
+    func receiveMovieDetailImage(cell: SelectedMovieImageTableViewCell)
 }
 
-final class DetailMoviePresenter: DetailViewPresenterProtocol {
-    
+final class MovieDetailPresenter: DetailViewPresenterProtocol {
     private let networkService: NetworkService?
     private var view: MovieDetailViewProtocol?
+    var router: RouterProtocol?
     var movieId: Int?
     var elements: Movie?
     
-    init(view: MovieDetailViewProtocol, networkService: NetworkService) {
+    init(view: MovieDetailViewProtocol, networkService: NetworkService, router: RouterProtocol, movieId: Int) {
         self.view = view
         self.networkService = networkService
+        self.router = router
+        self.movieId = movieId
     }
     
     func receiveMovieDetails() {
