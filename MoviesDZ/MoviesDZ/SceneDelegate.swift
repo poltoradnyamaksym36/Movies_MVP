@@ -11,14 +11,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
-        let firstVC = ListFilmViewController()
-        let presentFirstVC = MoviePresenter(view: firstVC)
-        firstVC.moviePresenter = presentFirstVC
-
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-
+        
+        let firstVC = ListFilmViewController()
+        let networkService = NetworkService()
+        let presenterVC = MoviePresenter(view: firstVC, networkService: networkService)
+        firstVC.moviePresenter = presenterVC
         let navController = UINavigationController(rootViewController: firstVC)
         window?.rootViewController = navController
         window?.makeKeyAndVisible()
