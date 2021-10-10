@@ -8,33 +8,37 @@ protocol MovieViewProtocol: AnyObject {
 }
 
 protocol MovieViewPresenterProtocol: AnyObject {
-    var arrayListFilms: ListFilm? { get set }
+    var arrayListFilms: [CoreMovieObject]? { get set }
     func receiveMovieList()
     func tapOnMovieCell(movieId: Int)
 }
 
 final class MoviePresenter: MovieViewPresenterProtocol {
-
-    
-    var arrayListFilms: ListFilm?
+    var arrayListFilms: [CoreMovieObject]?
     let networkService: NetworkServiceProtocol?
     var router: RouterProtocol?
+    var dataStorage: DataStorageServiceProtocol
     weak var view: MovieViewProtocol?
 
-    init(view: MovieViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
+    init(view: MovieViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol, dataStorage: DataStorageServiceProtocol) {
         self.view = view
         self.networkService = networkService
         self.router = router
+        self.dataStorage = dataStorage
     }
-    
+        
     func receiveMovieList() {
-        networkService?.getFilms { [weak self] elements in
-            if elements != nil {
-                self?.arrayListFilms = elements
-                self?.view?.reloadData()
+        networkService?.getFilms { (resuls, error) in
+            if error != nil {
+                print(error)
+                return
             }
+            self.dataStorage.save(object: resuls.results)
+            self.arrayListFilms = self.dataStorage.get()
+            self.view?.reloadData()
         }
     }
+    
     func tapOnMovieCell(movieId: Int) {
         router?.showFilmDetail(movieId: movieId)
     }

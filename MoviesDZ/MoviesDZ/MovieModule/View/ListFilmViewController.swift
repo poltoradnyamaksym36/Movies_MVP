@@ -6,11 +6,9 @@ import UIKit
 class ListFilmViewController: UIViewController {
     
     // MARK: Private Properties
-
     private var filmTableView = UITableView()
-    private var arrayListFilms: [Results] = []
     private let listFilmTableViewCellID = ListFilmTableViewCell.identifier
-
+    var router: RouterProtocol?
     // MARK: - Public Properties
 
     var presenter: MovieViewPresenterProtocol?
@@ -43,14 +41,14 @@ class ListFilmViewController: UIViewController {
 
 extension ListFilmViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter?.arrayListFilms?.results.count ?? 0
+        presenter?.arrayListFilms?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView
             .dequeueReusableCell(withIdentifier: listFilmTableViewCellID, for: indexPath) as? ListFilmTableViewCell
         else { return UITableViewCell() }
-        cell.setupView(result: presenter?.arrayListFilms?.results[indexPath.row])
+        cell.setupView(result: presenter?.arrayListFilms?[indexPath.row])
         return cell
     }
 }
@@ -59,8 +57,8 @@ extension ListFilmViewController: UITableViewDataSource {
 
 extension ListFilmViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let movieID = presenter?.arrayListFilms?.results[indexPath.row].id else { return }
-        presenter?.tapOnMovieCell(movieId: movieID)
+        guard let movieID = presenter?.arrayListFilms?[indexPath.row].id else { return }
+        router?.showFilmDetail(movieId: movieID)
     }
 }
 

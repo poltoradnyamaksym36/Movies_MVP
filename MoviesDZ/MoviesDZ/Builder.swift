@@ -14,11 +14,11 @@ protocol BuilderProtocol {
 }
 
 class ModelBuilder: BuilderProtocol {
-
     func createListFilmModule(router: RouterProtocol) -> UIViewController {
         let filmView = ListFilmViewController()
         let networkService = NetworkService()
-        let presenter = MoviePresenter(view: filmView, networkService: networkService, router: router)
+        let dataStorageService = DataStorageService()
+        let presenter = MoviePresenter(view: filmView, networkService: networkService, router: router, dataStorage: dataStorageService)
         filmView.presenter = presenter
         return filmView
     }

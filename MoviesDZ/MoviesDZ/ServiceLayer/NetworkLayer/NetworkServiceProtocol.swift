@@ -6,7 +6,7 @@ import Alamofire
 import UIKit
 
 protocol NetworkServiceProtocol: AnyObject {
-    func getFilms(completion: @escaping (ListFilm?) -> Void) // ListFilm
+    func getFilms(completion: @escaping (Results, Error?) -> Void)
     func getFilmDetails(movieID: Int?, completion: @escaping (Movie?) -> Void)
     func receiveImage(posterPath: String?, completion: @escaping (UIImage) -> Void)
 }
@@ -25,7 +25,7 @@ class NetworkService: NetworkServiceProtocol {
         }
     }
     
-    func getFilms(completion: @escaping (ListFilm?) -> Void) { //ListFilm
+    func getFilms(completion: @escaping (Results, Error?) -> Void) {
         let urlString = "https://api.themoviedb.org/3/movie/popular?api_key=8a8ef26b18b57682681f9e71bfc3d836&language=ru-RU&page=1"
         guard let url = URL(string: urlString) else { return }
         
@@ -34,10 +34,10 @@ class NetworkService: NetworkServiceProtocol {
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let movie = try decoder.decode(ListFilm.self, from: data) //ListFilm
-                completion(movie)
-            } catch {
-                completion(nil)
+                let movie = try decoder.decode(Results.self, from: data)
+                completion(movie, nil)
+            } catch let error {
+                print(error.localizedDescription)
             }
         }.resume()
     }

@@ -19,6 +19,7 @@ final class MovieDetailPresenter: DetailViewPresenterProtocol {
     private let networkService: NetworkService?
     private var view: MovieDetailViewProtocol?
     var router: RouterProtocol?
+    var dataStorageService: DataStorageServiceProtocol?
     var movieId: Int?
     var elements: Movie?
     

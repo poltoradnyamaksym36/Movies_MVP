@@ -2,13 +2,14 @@
 // Copyright © VTB. All rights reserved.
 
 import Foundation
+import CoreData
 /// Film Images Model
-struct ListFilm: Codable {
-    var results: [Results]
+struct Results: Codable {
+    var results: [ListFilms]
 }
 
 /// Film Images Model
-struct Results: Codable {
+struct ListFilms: Codable {
     var posterPath: String?
     var adult: Bool
     var overview: String?
@@ -21,7 +22,6 @@ struct Results: Codable {
     var voteCount: Int?
     var voteAverage: Float?
 }
-
 
 
 
