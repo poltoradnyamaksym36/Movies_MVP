@@ -8,8 +8,7 @@
 import Foundation
 import CoreData
 
-@objc(CoreDescription)
-class CoreDescription: NSManagedObject {
+@objc(CoreDescriptionObject)
+class CoreDescriptionObject: NSManagedObject {
     @NSManaged var posterPath: String
-
 }

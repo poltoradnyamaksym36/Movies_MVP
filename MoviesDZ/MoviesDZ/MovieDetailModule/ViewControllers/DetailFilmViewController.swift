@@ -4,11 +4,11 @@
 import UIKit
 
 final class DetailFilmViewController: UIViewController {
-    var presenter: MovieDetailPresenter?
+
     var movieID: Int?
+    var presenter: MovieDetailPresenter?
 
     // MARK: - Private Properties
-
     private let imageCellID = SelectedMovieImageTableViewCell.identifier
     private let descriptionCellID = DetailFilmTableViewCell.identifier
 
@@ -58,7 +58,7 @@ extension DetailFilmViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let movie = presenter?.elements else { return UITableViewCell() }
+        guard let movie = presenter?.movieDetails?.overview else { return UITableViewCell() }
         switch indexPath.row {
         case 0:
             guard let cell = tableView
@@ -67,7 +67,7 @@ extension DetailFilmViewController: UITableViewDataSource {
                     for: indexPath
                 ) as? SelectedMovieImageTableViewCell
             else { return UITableViewCell() }
-            presenter?.receiveMovieDetailImage(cell: cell)
+            cell.configureImage(movie: presenter?.movieDetails)
             return cell
         case 1:
             guard let cell = tableView
@@ -75,7 +75,7 @@ extension DetailFilmViewController: UITableViewDataSource {
                     withIdentifier: descriptionCellID,
                     for: indexPath
                 ) as? DetailFilmTableViewCell else { return UITableViewCell() }
-            cell.descriptionText = movie.overview
+            cell.descriptionText = movie
             return cell
         default:
             return UITableViewCell()

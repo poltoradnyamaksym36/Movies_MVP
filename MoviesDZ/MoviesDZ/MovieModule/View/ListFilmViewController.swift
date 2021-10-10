@@ -9,8 +9,8 @@ class ListFilmViewController: UIViewController {
     private var filmTableView = UITableView()
     private let listFilmTableViewCellID = ListFilmTableViewCell.identifier
     var router: RouterProtocol?
+    
     // MARK: - Public Properties
-
     var presenter: MovieViewPresenterProtocol?
     
     override func viewDidLoad() {
@@ -58,7 +58,8 @@ extension ListFilmViewController: UITableViewDataSource {
 extension ListFilmViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let movieID = presenter?.arrayListFilms?[indexPath.row].id else { return }
-        router?.showFilmDetail(movieId: movieID)
+        
+        presenter?.tapOnMovieCell(movieId: movieID)
     }
 }
 

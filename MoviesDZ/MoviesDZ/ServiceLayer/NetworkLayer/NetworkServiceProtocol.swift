@@ -7,7 +7,7 @@ import UIKit
 
 protocol NetworkServiceProtocol: AnyObject {
     func getFilms(completion: @escaping (Results, Error?) -> Void)
-    func getFilmDetails(movieID: Int?, completion: @escaping (Movie?) -> Void)
+    func getFilmDetails(movieID: Int?, completion: @escaping (Movie?, Error?) -> Void)
     func receiveImage(posterPath: String?, completion: @escaping (UIImage) -> Void)
 }
 
@@ -42,7 +42,7 @@ class NetworkService: NetworkServiceProtocol {
         }.resume()
     }
     
-    func getFilmDetails(movieID: Int?, completion: @escaping (Movie?) -> Void) {
+    func getFilmDetails(movieID: Int?, completion: @escaping (Movie?, Error?) -> Void) {
         guard let movieID = movieID else { return }
         let urlString = "https://api.themoviedb.org/3/movie/\(movieID)?api_key=7502b719af3e4c9ad68d80658e7b83ed&language=ru-RU"
         guard let url = URL(string: urlString) else { return }
@@ -53,9 +53,9 @@ class NetworkService: NetworkServiceProtocol {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let detailFilm = try decoder.decode(Movie.self, from: data)
-                completion(detailFilm)
+                completion(detailFilm, nil)
             } catch {
-                completion(nil)
+                completion(nil, responce.error)
             }
         }
     }

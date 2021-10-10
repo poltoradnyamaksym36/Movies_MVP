@@ -31,7 +31,7 @@
 		30DA9B56271342AF00F797B3 /* CoreDataMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DA9B55271342AF00F797B3 /* CoreDataMovies.swift */; };
 		30DA9B592713498400F797B3 /* MovieModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 30DA9B572713498400F797B3 /* MovieModel.xcdatamodeld */; };
 		30DA9B612713594600F797B3 /* CoreMovieObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DA9B602713594600F797B3 /* CoreMovieObject.swift */; };
-		30DA9B63271361A600F797B3 /* CoreDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DA9B62271361A600F797B3 /* CoreDescription.swift */; };
+		30DA9B63271361A600F797B3 /* CoreDescriptionObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DA9B62271361A600F797B3 /* CoreDescriptionObject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,7 +71,7 @@
 		30DA9B55271342AF00F797B3 /* CoreDataMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMovies.swift; sourceTree = "<group>"; };
 		30DA9B582713498400F797B3 /* MovieModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MovieModel.xcdatamodel; sourceTree = "<group>"; };
 		30DA9B602713594600F797B3 /* CoreMovieObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMovieObject.swift; sourceTree = "<group>"; };
-		30DA9B62271361A600F797B3 /* CoreDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDescription.swift; sourceTree = "<group>"; };
+		30DA9B62271361A600F797B3 /* CoreDescriptionObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDescriptionObject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,7 +131,7 @@
 				3087E8D526AF27B800F3BD09 /* Assets.xcassets */,
 				30DA9B572713498400F797B3 /* MovieModel.xcdatamodeld */,
 				30DA9B602713594600F797B3 /* CoreMovieObject.swift */,
-				30DA9B62271361A600F797B3 /* CoreDescription.swift */,
+				30DA9B62271361A600F797B3 /* CoreDescriptionObject.swift */,
 				30C99CC9271211C1003502E8 /* MoviesDZTests */,
 				3087E8CA26AF27B700F3BD09 /* Products */,
 				3087E8D726AF27B800F3BD09 /* LaunchScreen.storyboard */,
@@ -379,7 +379,7 @@
 				30C9296B26B1CA92002A9145 /* Movie.swift in Sources */,
 				3098ED1E270E278B00B02987 /* MovieDetailPresenter.swift in Sources */,
 				30C9296D26B1D978002A9145 /* ListFilmTableViewCell.swift in Sources */,
-				30DA9B63271361A600F797B3 /* CoreDescription.swift in Sources */,
+				30DA9B63271361A600F797B3 /* CoreDescriptionObject.swift in Sources */,
 				306C58AB2711D6D200AB0E77 /* Builder.swift in Sources */,
 				30DA9B472713013900F797B3 /* Repository.swift in Sources */,
 				30DA9B592713498400F797B3 /* MovieModel.xcdatamodeld in Sources */,

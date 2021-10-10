@@ -26,7 +26,8 @@ class ModelBuilder: BuilderProtocol {
     func createFilmDetails(router: RouterProtocol, movieId: Int) -> UIViewController {
         let detailFilmView = DetailFilmViewController()
         let networkService = NetworkService()
-        let presenter = MovieDetailPresenter(view: detailFilmView, networkService: networkService, router: router, movieId: movieId)
+        let dataStorage = DataStorageService()
+        let presenter = MovieDetailPresenter(view: detailFilmView, networkService: networkService, router: router, movieId: movieId, dataStorageService: dataStorage)
         detailFilmView.presenter = presenter
         return detailFilmView
     }
