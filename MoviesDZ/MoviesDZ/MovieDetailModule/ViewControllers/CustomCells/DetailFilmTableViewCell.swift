@@ -15,6 +15,7 @@ final class DetailFilmTableViewCell: UITableViewCell {
     var descriptionText: String?
 
     override func layoutSubviews() {
+        accessibilityIdentifier = "MovieDetalTableViewCell"
         createFilmLabel()
         descriptionFilmLabel.text = descriptionText ?? ""
     }
