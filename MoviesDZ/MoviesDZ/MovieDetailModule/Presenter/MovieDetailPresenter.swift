@@ -18,28 +18,33 @@ protocol DetailViewPresenterProtocol: AnyObject{
 final class MovieDetailPresenter: DetailViewPresenterProtocol {
     private let networkService: NetworkService?
     private var view: MovieDetailViewProtocol?
-    var router: RouterProtocol?
+    var arrayListFilms: [CoreDescriptionObject]?
     var movieId: Int?
-    var elements: Movie?
+    var router: RouterProtocol?
+    var dataStorageService: DataStorageServiceProtocol
+    var movieDetails: Movie?
     
-    init(view: MovieDetailViewProtocol, networkService: NetworkService, router: RouterProtocol, movieId: Int) {
+    init(view: MovieDetailViewProtocol, networkService: NetworkService, router: RouterProtocol, movieId: Int, dataStorageService: DataStorageServiceProtocol) {
         self.view = view
         self.networkService = networkService
         self.router = router
         self.movieId = movieId
+        self.dataStorageService = dataStorageService
     }
     
     func receiveMovieDetails() {
-        networkService?.getFilmDetails(movieID: movieId, completion: { [weak self] elements in
-            if elements != nil {
-                self?.elements = elements
-                self?.view?.reloadData()
+        networkService?.getFilmDetails(movieID: movieId, completion: { (movieDetail, error) in
+            if error != nil {
+                print(error?.localizedDescription)
+               return
             }
+            self.movieDetails = movieDetail
+            self.view?.reloadData()
         })
     }
     
     func receiveMovieDetailImage(cell: SelectedMovieImageTableViewCell) {
-        networkService?.receiveImage(posterPath: elements?.posterPath, completion: { [weak self] image in
+        networkService?.receiveImage(posterPath: movieDetails?.posterPath, completion: { [weak self] image in
             cell.chosenMoviePosterImageView.image = image
             self?.view?.reloadData()
         })

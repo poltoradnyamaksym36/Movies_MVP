@@ -23,7 +23,8 @@ class ListFilmTableViewCell: UITableViewCell {
         createTitleLabel()
     }
     
-    func setupView(result: Results?) {
+    func setupView(result: CoreMovieObject?) {
+        titleLabel.text = result?.title
         labelText.text = result?.overview
         movieAPIService.receiveImage(posterPath: result?.posterPath ?? "", completion: { [weak self] image in
             self?.movieImageView.image = image

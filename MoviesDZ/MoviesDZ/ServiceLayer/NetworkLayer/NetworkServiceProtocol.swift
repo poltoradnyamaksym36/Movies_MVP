@@ -6,8 +6,8 @@ import Alamofire
 import UIKit
 
 protocol NetworkServiceProtocol: AnyObject {
-    func getFilms(completion: @escaping (ListFilm?) -> Void) // ListFilm
-    func getFilmDetails(movieID: Int?, completion: @escaping (Movie?) -> Void)
+    func getFilms(completion: @escaping (Results, Error?) -> Void)
+    func getFilmDetails(movieID: Int?, completion: @escaping (Movie?, Error?) -> Void)
     func receiveImage(posterPath: String?, completion: @escaping (UIImage) -> Void)
 }
 
@@ -25,7 +25,7 @@ class NetworkService: NetworkServiceProtocol {
         }
     }
     
-    func getFilms(completion: @escaping (ListFilm?) -> Void) { //ListFilm
+    func getFilms(completion: @escaping (Results, Error?) -> Void) {
         let urlString = "https://api.themoviedb.org/3/movie/popular?api_key=8a8ef26b18b57682681f9e71bfc3d836&language=ru-RU&page=1"
         guard let url = URL(string: urlString) else { return }
         
@@ -34,15 +34,15 @@ class NetworkService: NetworkServiceProtocol {
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let movie = try decoder.decode(ListFilm.self, from: data) //ListFilm
-                completion(movie)
-            } catch {
-                completion(nil)
+                let movie = try decoder.decode(Results.self, from: data)
+                completion(movie, nil)
+            } catch let error {
+                print(error.localizedDescription)
             }
         }.resume()
     }
     
-    func getFilmDetails(movieID: Int?, completion: @escaping (Movie?) -> Void) {
+    func getFilmDetails(movieID: Int?, completion: @escaping (Movie?, Error?) -> Void) {
         guard let movieID = movieID else { return }
         let urlString = "https://api.themoviedb.org/3/movie/\(movieID)?api_key=7502b719af3e4c9ad68d80658e7b83ed&language=ru-RU"
         guard let url = URL(string: urlString) else { return }
@@ -53,9 +53,9 @@ class NetworkService: NetworkServiceProtocol {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let detailFilm = try decoder.decode(Movie.self, from: data)
-                completion(detailFilm)
+                completion(detailFilm, nil)
             } catch {
-                completion(nil)
+                completion(nil, responce.error)
             }
         }
     }

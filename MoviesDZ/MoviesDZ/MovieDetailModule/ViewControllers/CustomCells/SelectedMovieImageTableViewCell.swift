@@ -10,17 +10,17 @@ final class SelectedMovieImageTableViewCell: UITableViewCell {
 
     let chosenMoviePosterImageView = UIImageView()
     private let descriptionLabel = UILabel()
+    private let networkService = NetworkService()
 
     // MARK: - Private methods
 
-    func configure(movie: Movie) {
+    func configureImage(movie: Movie?) {
         DispatchQueue.global().async {
-            let urlString = "https://image.tmdb.org/t/p/w500\(movie.posterPath ?? "")"
-            guard let url = URL(string: urlString) else { return }
-            guard let imageData = try? Data(contentsOf: url) else { return }
-            guard let posterImage = UIImage(data: imageData) else { return }
+            guard let posterId = movie?.posterPath else { return }
             DispatchQueue.main.async {
-                self.chosenMoviePosterImageView.image = posterImage
+                self.networkService.receiveImage(posterPath: posterId) { [weak self] image in
+                    self?.chosenMoviePosterImageView.image = image
+                }
             }
         }
     }
