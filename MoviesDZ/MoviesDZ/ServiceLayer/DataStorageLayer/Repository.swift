@@ -13,7 +13,6 @@ protocol DataBaseProtocol {
     func remove(id: Int)
 }
 
-
 final class Repository: DataBaseProtocol {
     
     var dataBase: DataBaseProtocol
