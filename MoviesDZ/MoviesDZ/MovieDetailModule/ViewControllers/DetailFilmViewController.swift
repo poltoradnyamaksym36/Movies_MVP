@@ -29,6 +29,7 @@ final class DetailFilmViewController: UIViewController {
         super.viewDidLoad()
         chosenMovieTableView.delegate = self
         chosenMovieTableView.dataSource = self
+        chosenMovieTableView.accessibilityIdentifier = "MovieDetalTableView"
         subviews()
         constraints()
         presenter?.receiveMovieDetails()
