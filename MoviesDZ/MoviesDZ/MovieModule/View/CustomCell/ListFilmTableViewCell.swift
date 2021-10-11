@@ -12,8 +12,13 @@ class ListFilmTableViewCell: UITableViewCell {
     let labelText = UILabel()
     let movieImageView = UIImageView()
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        accessibilityIdentifier = "MovieTableViewCell"
+    }
+    
+    override func layoutSubviews() {
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
