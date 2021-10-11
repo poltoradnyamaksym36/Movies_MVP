@@ -15,5 +15,6 @@ class MoviesDZUITests: XCTestCase {
         continueAfterFailure = false
         application = XCUIApplication()
         application.launch()
+        
     }
 }
