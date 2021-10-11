@@ -27,6 +27,7 @@ final class DetailFilmViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        chosenMovieTableView.accessibilityIdentifier = "MovieDetalTableView"
         chosenMovieTableView.delegate = self
         chosenMovieTableView.dataSource = self
         subviews()

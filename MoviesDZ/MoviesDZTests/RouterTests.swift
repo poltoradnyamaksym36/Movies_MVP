@@ -27,29 +27,22 @@ final class MockNavigationController: UINavigationController {
 }
 
 
-class MoviesDZTests: XCTestCase {
-
+class RouterTest: XCTestCase {
     var router: RouterProtocol!
     var navigationController = MockNavigationController()
     let assembly = ModelBuilder()
-    
-    override func setUpWithError() throws {
+
+    override func setUp() {
         router = Router(navigationController: navigationController, builder: assembly)
     }
 
-    override func tearDownWithError() throws {
+    override func tearDown() {
         router = nil
     }
 
     func testRouterPush() {
-        router.showFilmDetail(movieId: 1)
-        let detailMovieViewController = navigationController.presntedVc
-        XCTAssertTrue(detailMovieViewController is DetailFilmViewController)
+        router.showFilmDetail(movieId: 2)
+        let detailMovieVc = navigationController.presntedVc
+        XCTAssertTrue(detailMovieVc is DetailFilmViewController)
     }
-    
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
 }

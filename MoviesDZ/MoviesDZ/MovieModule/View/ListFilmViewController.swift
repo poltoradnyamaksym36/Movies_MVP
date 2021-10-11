@@ -19,6 +19,7 @@ class ListFilmViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(filmTableView)
         navigationItem.title = "Movies"
+        filmTableView.accessibilityIdentifier = "MovieTableView"
 
         filmTableView.translatesAutoresizingMaskIntoConstraints = false
         filmTableView.register(ListFilmTableViewCell.self, forCellReuseIdentifier: listFilmTableViewCellID)
