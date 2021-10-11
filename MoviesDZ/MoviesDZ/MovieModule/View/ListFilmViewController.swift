@@ -23,6 +23,7 @@ class ListFilmViewController: UIViewController {
         filmTableView.backgroundColor = .white
         filmTableView.dataSource = self
         filmTableView.delegate = self
+        filmTableView.accessibilityIdentifier = "MovieTableView"
         setConstraints()
         presenter?.receiveMovieList()
     }
