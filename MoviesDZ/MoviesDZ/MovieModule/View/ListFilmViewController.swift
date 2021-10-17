@@ -59,7 +59,6 @@ extension ListFilmViewController: UITableViewDataSource {
 extension ListFilmViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let movieID = presenter?.arrayListFilms?[indexPath.row].id else { return }
-        
         presenter?.tapOnMovieCell(movieId: movieID)
     }
 }

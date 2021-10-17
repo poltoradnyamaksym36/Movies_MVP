@@ -30,7 +30,6 @@ final class MoviePresenter: MovieViewPresenterProtocol {
     func receiveMovieList() {
         networkService?.getFilms { (resuls, error) in
             if error != nil {
-                print(error)
                 return
             }
             self.dataStorage.save(object: resuls.results)
